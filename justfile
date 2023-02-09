@@ -8,6 +8,7 @@ gen:
         --c-output macos/Runner/bridge_generated.h \
         --dart-decl-output lib/bridge_definitions.dart \
         --wasm
+    flutter pub run build_runner build
 
 lint:
     cd native && cargo fmt
