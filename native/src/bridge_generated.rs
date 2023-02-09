@@ -68,18 +68,19 @@ where
 impl support::IntoDart for Platform {
     fn into_dart(self) -> support::DartAbi {
         match self {
-            Self::Unknown => 0,
-            Self::Android => 1,
-            Self::Ios => 2,
-            Self::Windows => 3,
-            Self::Unix => 4,
-            Self::MacIntel => 5,
-            Self::MacApple => 6,
-            Self::Wasm => 7,
+            Self::Unknown => vec![0.into_dart()],
+            Self::Android => vec![1.into_dart()],
+            Self::Ios => vec![2.into_dart()],
+            Self::Windows => vec![3.into_dart()],
+            Self::Unix => vec![4.into_dart()],
+            Self::MacOs(field0) => vec![5.into_dart(), field0.into_dart()],
+            Self::Wasm => vec![6.into_dart()],
         }
         .into_dart()
     }
 }
+impl support::IntoDartExceptPrimitive for Platform {}
+
 // Section: executor
 
 support::lazy_static! {

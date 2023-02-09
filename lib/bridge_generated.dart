@@ -56,16 +56,43 @@ class NativeImpl implements Native {
   }
 // Section: wire2api
 
+  String _wire2api_String(dynamic raw) {
+    return raw as String;
+  }
+
   bool _wire2api_bool(dynamic raw) {
     return raw as bool;
   }
 
-  int _wire2api_i32(dynamic raw) {
+  Platform _wire2api_platform(dynamic raw) {
+    switch (raw[0]) {
+      case 0:
+        return Platform_Unknown();
+      case 1:
+        return Platform_Android();
+      case 2:
+        return Platform_Ios();
+      case 3:
+        return Platform_Windows();
+      case 4:
+        return Platform_Unix();
+      case 5:
+        return Platform_MacOs(
+          _wire2api_String(raw[1]),
+        );
+      case 6:
+        return Platform_Wasm();
+      default:
+        throw Exception("unreachable");
+    }
+  }
+
+  int _wire2api_u8(dynamic raw) {
     return raw as int;
   }
 
-  Platform _wire2api_platform(dynamic raw) {
-    return Platform.values[raw];
+  Uint8List _wire2api_uint_8_list(dynamic raw) {
+    return raw as Uint8List;
   }
 }
 

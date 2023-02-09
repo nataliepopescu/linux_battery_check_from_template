@@ -8,6 +8,9 @@ import 'dart:convert';
 import 'dart:async';
 import 'package:meta/meta.dart';
 import 'package:flutter_rust_bridge/flutter_rust_bridge.dart';
+import 'package:freezed_annotation/freezed_annotation.dart' hide protected;
+
+part 'bridge_definitions.freezed.dart';
 
 abstract class Native {
   Future<Platform> platform({dynamic hint});
@@ -19,13 +22,15 @@ abstract class Native {
   FlutterRustBridgeTaskConstMeta get kRustReleaseModeConstMeta;
 }
 
-enum Platform {
-  Unknown,
-  Android,
-  Ios,
-  Windows,
-  Unix,
-  MacIntel,
-  MacApple,
-  Wasm,
+@freezed
+class Platform with _$Platform {
+  const factory Platform.unknown() = Platform_Unknown;
+  const factory Platform.android() = Platform_Android;
+  const factory Platform.ios() = Platform_Ios;
+  const factory Platform.windows() = Platform_Windows;
+  const factory Platform.unix() = Platform_Unix;
+  const factory Platform.macOs(
+    String field0,
+  ) = Platform_MacOs;
+  const factory Platform.wasm() = Platform_Wasm;
 }

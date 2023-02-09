@@ -11,8 +11,9 @@ pub enum Platform {
     Ios,
     Windows,
     Unix,
-    MacIntel,
-    MacApple,
+    //MacIntel,
+    //MacApple,
+    MacOs(String),
     Wasm,
 }
 
