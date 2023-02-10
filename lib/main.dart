@@ -127,16 +127,25 @@ class _MyHomePageState extends State<MyHomePage> {
                 // to the FutureBuilder.future.
                 final Platform platform = data[0];
                 final release = data[1] ? 'Release' : 'Debug';
-                final text = const {
-                      Platform.Android: 'Android',
-                      Platform.Ios: 'iOS',
-                      Platform.MacApple: 'MacOS with Apple Silicon',
-                      Platform.MacIntel: 'MacOS',
-                      Platform.Windows: 'Windows',
-                      Platform.Unix: 'Unix',
-                      Platform.Wasm: 'the Web',
-                    }[platform] ??
-                    'Unknown OS';
+                final text = platform.when(
+                  android: () => "Android",
+                  ios: () => "iOS",
+                  macOs: (arch) => "MacOS on $arch",
+                  windows: () => "Windows",
+                  unix: () => "Unix",
+                  wasm: () => "The Web",
+                  unknown: () => "Unknown",
+                );
+                //final text = const {
+                //      Platform.Android: 'Android',
+                //      Platform.Ios: 'iOS',
+                //      Platform.MacApple: 'MacOS with Apple Silicon',
+                //      Platform.MacIntel: 'MacOS',
+                //      Platform.Windows: 'Windows',
+                //      Platform.Unix: 'Unix',
+                //      Platform.Wasm: 'the Web',
+                //    }[platform] ??
+                //    'Unknown OS';
                 return Text('$text ($release)', style: style);
               },
             )
