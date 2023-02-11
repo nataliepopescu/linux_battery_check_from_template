@@ -6,9 +6,9 @@ gen:
         --rust-input native/src/api.rs \
         --dart-output lib/bridge_generated.dart \
         --c-output macos/Runner/bridge_generated.h \
+        --extra-c-output-path ios/Runner/ \
         --dart-decl-output lib/bridge_definitions.dart \
         --wasm
-    cp macos/Runner/bridge_generated.h ios/Runner/bridge_generated.h
     flutter pub run build_runner build
 
 lint:
